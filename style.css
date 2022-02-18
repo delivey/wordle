@@ -2,6 +2,15 @@ body {
     background-color: #121213;
 }
 
+p {
+    color: white;
+    font-size: 45px;
+    font-family: monospace;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 0px;       /* The same as your div height */
+}
+
 .blocks {
     margin: 0;
     position: absolute;
