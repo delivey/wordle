@@ -2,6 +2,7 @@ function isLetter(s) {
   return s.match("^[a-zA-Z\(\)]+$") && s.length === 1;    
 }
 
+let wordsTyped = 0;
 let lettersTyped = 0;
 lastEnter = true;
 
@@ -30,7 +31,20 @@ function main() {
         }
         if (key === "Enter") {
             console.log("Entered")
+            if (lettersTyped % 5 == 0) wordsTyped++;
             lastEnter = true;
+        } else if (key === "Backspace") {
+            if (!lastEnter) {
+                const blocks = document.getElementsByClassName("block");
+                for (let i=blocks.length-1; i>=0; --i) {
+                    const block = blocks[i]
+                    if (block.lastChild) {
+                        block.removeChild(block.lastChild);
+                        lettersTyped--;
+                        break;
+                    }
+                }
+            }
         } else {
             lastEnter = false;
         }
