@@ -4,6 +4,7 @@ function isLetter(s) {
 
 let wordsTyped = 0;
 let lettersTyped = 0;
+let lettersFromLastRow = 0;
 lastEnter = true;
 
 function main() {
@@ -18,12 +19,13 @@ function main() {
                 const block = blocks[i]
                 console.log(block)
                 if (!block.lastChild) {
-                    if (lettersTyped % 5 !== 0 || lettersTyped === 0 || lastEnter) {
+                    if (lettersTyped % 5 !== 0 || lettersTyped === 0 || lastEnter || lettersFromLastRow === 0) {
                         let letterElement = document.createElement("p");
                         let letter = document.createTextNode(key);
                         letterElement.appendChild(letter)
                         block.appendChild(letterElement);
                         lettersTyped++;
+                        lettersFromLastRow++;
                         break;
                     }
                 }
@@ -31,16 +33,20 @@ function main() {
         }
         if (key === "Enter") {
             console.log("Entered")
-            if (lettersTyped % 5 == 0) wordsTyped++;
+            if (lettersTyped % 5 == 0) {
+                wordsTyped++;
+                lettersFromLastRow = 0;
+            }
             lastEnter = true;
         } else if (key === "Backspace") {
             if (!lastEnter) {
                 const blocks = document.getElementsByClassName("block");
                 for (let i=blocks.length-1; i>=0; --i) {
                     const block = blocks[i]
-                    if (block.lastChild) {
+                    if (block.lastChild && lettersFromLastRow > 0) {
                         block.removeChild(block.lastChild);
                         lettersTyped--;
+                        lettersFromLastRow--;
                         break;
                     }
                 }
