@@ -5,7 +5,18 @@ function isLetter(s) {
 let wordsTyped = 0;
 let lettersTyped = 0;
 let lettersFromLastRow = 0;
+let letters = []
 lastEnter = true;
+
+function invalidWord(word) {
+    let error = document.getElementById("error")
+    error.innerHTML = `${word} is not a valid word.`
+}
+
+function hideInvalidWord() {
+    let error = document.getElementById("error")
+    error.innerHTML = ``
+}
 
 function main() {
     const input = document.getElementById("input")
@@ -25,6 +36,7 @@ function main() {
                         letterElement.appendChild(letter)
                         block.appendChild(letterElement);
                         lettersTyped++;
+                        letters.push(key)
                         lettersFromLastRow++;
                         break;
                     }
@@ -34,17 +46,25 @@ function main() {
         if (key === "Enter") {
             console.log("Entered")
             if (lettersTyped % 5 == 0) {
-                wordsTyped++;
-                lettersFromLastRow = 0;
+                let wordLetters = letters.slice((letters.length - 5), letters.length);
+                let word = wordLetters.join("").toLowerCase();
+                let validWord = goodAnswers.includes(word);
+                if (!validWord) invalidWord(word);
+                else {
+                    wordsTyped++;
+                    lettersFromLastRow = 0;
+                    lastEnter = true;
+                }
             }
-            lastEnter = true;
         } else if (key === "Backspace") {
             if (!lastEnter) {
+                hideInvalidWord();
                 const blocks = document.getElementsByClassName("block");
                 for (let i=blocks.length-1; i>=0; --i) {
                     const block = blocks[i]
                     if (block.lastChild && lettersFromLastRow > 0) {
                         block.removeChild(block.lastChild);
+                        letters.pop()
                         lettersTyped--;
                         lettersFromLastRow--;
                         break;
