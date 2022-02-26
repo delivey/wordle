@@ -7,6 +7,7 @@ let lettersTyped = 0;
 let lettersFromLastRow = 0;
 let letters = []
 lastEnter = true;
+const currentWord = possibleAnswers[(Math.random() * possibleAnswers.length) | 0]
 
 function invalidWord(word) {
     let error = document.getElementById("error")
@@ -19,6 +20,9 @@ function hideInvalidWord() {
 }
 
 function main() {
+    let answer = document.getElementById("answer")
+    answer.innerHTML = currentWord;
+
     const input = document.getElementById("input")
     console.log("input")
     input.onkeydown = function(e){
