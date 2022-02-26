@@ -48,7 +48,7 @@ function main() {
             if (lettersTyped % 5 == 0) {
                 let wordLetters = letters.slice((letters.length - 5), letters.length);
                 let word = wordLetters.join("").toLowerCase();
-                let validWord = goodAnswers.includes(word);
+                let validWord = goodAnswers.includes(word) || possibleAnswers.includes(word);
                 if (!validWord) invalidWord(word);
                 else {
                     wordsTyped++;
