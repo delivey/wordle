@@ -26,10 +26,14 @@ function showWordScore(word) {
     const newBlocks = blocks.splice(start, end)
     for (let i=0; i<newBlocks.length; ++i) {
         const block = newBlocks[i]
-        const letter = block.lastChild.innerHTML;
+        const letter = block.lastChild.innerHTML.toLowerCase();
 
-        console.log(currentWord, letter)
-        if (currentWord.includes(letter.toLowerCase())) {
+        let letterInWord = currentWord.includes(letter)
+
+        console.log(letter, currentWord.indexOf(letter), word.indexOf(letter))
+        if (letterInWord && currentWord.indexOf(letter) === word.indexOf(letter)) {
+            block.classList.add("green")
+        } else if (letterInWord) {
             block.classList.add("yellow")
         } else {
             block.classList.add("gray")
