@@ -19,6 +19,11 @@ function hideInvalidWord() {
     error.innerHTML = ``
 }
 
+function winningDisplay() {
+    let error = document.getElementById("answer")
+    error.innerHTML = `You won!`
+}
+
 function showWordScore(word) {
     const blocks = [...document.getElementsByClassName("block")];
     let start = (wordsTyped * 5)
@@ -81,6 +86,7 @@ function main() {
                     wordsTyped++;
                     lettersFromLastRow = 0;
                     lastEnter = true;
+                    if (currentWord === word) winningDisplay()
                 }
             }
         } else if (key === "Backspace") {
