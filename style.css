@@ -36,3 +36,15 @@ p {
     margin-top: 100px;
     margin-left: -100px;
 }
+
+.yellow {
+    background-color: #b59f3b;
+}
+
+.green {
+    background-color: #538d4e;
+}
+
+.gray {
+    background-color: #939598
+}

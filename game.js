@@ -19,6 +19,24 @@ function hideInvalidWord() {
     error.innerHTML = ``
 }
 
+function showWordScore(word) {
+    const blocks = [...document.getElementsByClassName("block")];
+    let start = (wordsTyped * 5)
+    let end = (wordsTyped * 5) + 5 
+    const newBlocks = blocks.splice(start, end)
+    for (let i=0; i<newBlocks.length; ++i) {
+        const block = newBlocks[i]
+        const letter = block.lastChild.innerHTML;
+
+        console.log(currentWord, letter)
+        if (currentWord.includes(letter.toLowerCase())) {
+            block.classList.add("yellow")
+        } else {
+            block.classList.add("gray")
+        }
+    }
+}
+
 function main() {
     let answer = document.getElementById("answer")
     answer.innerHTML = currentWord;
@@ -55,6 +73,7 @@ function main() {
                 let validWord = goodAnswers.includes(word) || possibleAnswers.includes(word);
                 if (!validWord) invalidWord(word);
                 else {
+                    showWordScore(word);
                     wordsTyped++;
                     lettersFromLastRow = 0;
                     lastEnter = true;
