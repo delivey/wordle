@@ -7,7 +7,7 @@ let lettersTyped = 0;
 let lettersFromLastRow = 0;
 let letters = []
 lastEnter = true;
-const currentWord = possibleAnswers[(Math.random() * possibleAnswers.length) | 0]
+const currentWord = "abaft" // possibleAnswers[(Math.random() * possibleAnswers.length) | 0]
 
 function invalidWord(word) {
     let error = document.getElementById("error")
@@ -35,8 +35,7 @@ function showWordScore(word) {
 
         let letterInWord = currentWord.includes(letter)
 
-        console.log(letter, currentWord.indexOf(letter), word.indexOf(letter))
-        if (letterInWord && currentWord.indexOf(letter) === word.indexOf(letter)) {
+        if (letterInWord && currentWord[i] === letter) {
             block.classList.add("green")
         } else if (letterInWord) {
             block.classList.add("yellow")
