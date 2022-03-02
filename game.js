@@ -7,7 +7,7 @@ let lettersTyped = 0;
 let lettersFromLastRow = 0;
 let letters = []
 lastEnter = true;
-const currentWord = "abaft" // possibleAnswers[(Math.random() * possibleAnswers.length) | 0]
+const currentWord = possibleAnswers[(Math.random() * possibleAnswers.length) | 0]
 
 function invalidWord(word) {
     let error = document.getElementById("error")
@@ -24,16 +24,23 @@ function winningDisplay() {
     error.innerHTML = `You won!`
 }
 
+function removeByIndex(str,index) {
+    return str.slice(0,index) + str.slice(index+1);
+}
+
 function showWordScore(word) {
     const blocks = [...document.getElementsByClassName("block")];
     let start = (wordsTyped * 5)
     let end = (wordsTyped * 5) + 5 
     const newBlocks = blocks.splice(start, end)
+    let removedLettersWord = currentWord;
     for (let i=0; i<newBlocks.length; ++i) {
         const block = newBlocks[i]
         const letter = block.lastChild.innerHTML.toLowerCase();
 
-        let letterInWord = currentWord.includes(letter)
+        let letterInWord = removedLettersWord.includes(letter)
+        let index = removedLettersWord.indexOf(letter)
+        if (letterInWord) removedLettersWord = removeByIndex(removedLettersWord, index)
 
         if (letterInWord && currentWord[i] === letter) {
             block.classList.add("green")
