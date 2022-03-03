@@ -53,9 +53,6 @@ function showWordScore(word) {
 }
 
 function main() {
-    let answer = document.getElementById("answer")
-    answer.innerHTML = currentWord;
-
     const input = document.getElementById("input")
     console.log("input")
     input.onkeydown = function(e){
