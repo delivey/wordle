@@ -7,7 +7,7 @@ let lettersTyped = 0;
 let lettersFromLastRow = 0;
 let letters = []
 lastEnter = true;
-const currentWord = possibleAnswers[(Math.random() * possibleAnswers.length) | 0]
+const currentWord = "crave" //possibleAnswers[(Math.random() * possibleAnswers.length) | 0]
 
 function invalidWord(word) {
     let error = document.getElementById("error")
@@ -34,14 +34,16 @@ function showWordScore() {
     let end = (wordsTyped * 5) + 5 
     let removedLettersWord = currentWord;
     for (let i=start; i<end; ++i) {
+        let indexI = i - (wordsTyped*5)
         const block = blocks[i]
         const letter = block.lastChild.innerHTML.toLowerCase();
 
         let letterInWord = removedLettersWord.includes(letter)
         let index = removedLettersWord.indexOf(letter)
+        console.log(letter, letterInWord, index, removedLettersWord)
         if (letterInWord) removedLettersWord = removeByIndex(removedLettersWord, index)
 
-        if (letterInWord && currentWord[i] === letter) {
+        if (letterInWord && currentWord[indexI] === letter) {
             block.classList.add("green")
         } else if (letterInWord) {
             block.classList.add("yellow")
