@@ -28,14 +28,13 @@ function removeByIndex(str,index) {
     return str.slice(0,index) + str.slice(index+1);
 }
 
-function showWordScore(word) {
-    const blocks = [...document.getElementsByClassName("block")];
+function showWordScore() {
+    let blocks = [...document.getElementsByClassName("block")];
     let start = (wordsTyped * 5)
     let end = (wordsTyped * 5) + 5 
-    const newBlocks = blocks.splice(start, end)
     let removedLettersWord = currentWord;
-    for (let i=0; i<newBlocks.length; ++i) {
-        const block = newBlocks[i]
+    for (let i=start; i<end; ++i) {
+        const block = blocks[i]
         const letter = block.lastChild.innerHTML.toLowerCase();
 
         let letterInWord = removedLettersWord.includes(letter)
@@ -50,11 +49,11 @@ function showWordScore(word) {
             block.classList.add("gray")
         }
     }
+    return true
 }
 
 function main() {
     const input = document.getElementById("input")
-    console.log("input")
     input.onkeydown = function(e){
         let key = e.key
         if (isLetter(key)) {
@@ -62,8 +61,8 @@ function main() {
             const blocks = document.getElementsByClassName("block");
             for (let i=0; i<blocks.length; ++i) {
                 const block = blocks[i]
-                console.log(block)
                 if (!block.lastChild) {
+                    console.log(lettersTyped % 5 !== 0, lettersTyped === 0,lastEnter, lettersFromLastRow === 0)
                     if (lettersTyped % 5 !== 0 || lettersTyped === 0 || lastEnter || lettersFromLastRow === 0) {
                         let letterElement = document.createElement("p");
                         let letter = document.createTextNode(key);
@@ -78,14 +77,14 @@ function main() {
             }
         }
         if (key === "Enter") {
-            console.log("Entered")
             if (lettersTyped % 5 == 0) {
                 let wordLetters = letters.slice((letters.length - 5), letters.length);
                 let word = wordLetters.join("").toLowerCase();
                 let validWord = goodAnswers.includes(word) || possibleAnswers.includes(word);
-                if (!validWord) invalidWord(word);
-                else {
-                    showWordScore(word);
+                if (!validWord) {
+                    invalidWord(word);
+                } else {
+                    showWordScore();
                     wordsTyped++;
                     lettersFromLastRow = 0;
                     lastEnter = true;
