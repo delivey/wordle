@@ -3,11 +3,12 @@ body {
 }
 
 p {
+    position: fixed;
     color: white;
-    font-size: 45px;
+    font-size: 60px;
     font-family: monospace;
-    text-align: center;
-    vertical-align: middle;
+    margin-left: 23px;
+    margin-top: 40px;
     line-height: 0px;       /* The same as your div height */
 }
 
@@ -34,7 +35,7 @@ p {
     height: 150px;
     width: 700px;
     margin-top: 100px;
-    margin-left: -100px;
+    margin-left: 80px;
 }
 
 .yellow {
