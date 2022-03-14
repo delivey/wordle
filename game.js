@@ -7,7 +7,7 @@ let lettersTyped = 0;
 let lettersFromLastRow = 0;
 let letters = []
 lastEnter = true;
-const currentWord = "crave" //possibleAnswers[(Math.random() * possibleAnswers.length) | 0]
+const currentWord = possibleAnswers[(Math.random() * possibleAnswers.length) | 0]
 
 function invalidWord(word) {
     let error = document.getElementById("error")
